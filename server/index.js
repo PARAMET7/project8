@@ -32,3 +32,8 @@ app.use('/auth', authRoute);// Prefix all auth routes with '/auth'
 
 const port = process.env.PORT || 8000; // Use environment variable for port if available
 app.listen(port, () => console.log(`Server is running on port ${port}`));
+
+
+//PORT=5005
+//ORIGIN=http://localhost:3000
+//TOKEN_SECRET=y0uRt0k3N$eCr3T

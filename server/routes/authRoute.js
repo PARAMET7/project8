@@ -1,18 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const cors = require('cors');
-const { test } = require('../controlers/authControlers');
+const { test, registerUser } = require('../controlers/authControlers')
 
 // Middleware for CORS
-router.use(
-  cors({
-    credentials: true,
-    origin: 'http://localhost:5173',
-  })
-);
+router.use(cors({
+  credentials: true,
+  origin: 'http://localhost:5173', // Ensure this matches your frontend origin
+}));
 
-// Define route to test the server
+// Define your route(s)
 router.get('/', test);
+router.post('/register', registerUser)
 
 module.exports = router;
-app.use('/auth', require('./routes/authRoute')); 

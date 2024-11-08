@@ -1,6 +1,10 @@
 const express = require('express');
 const dotenv = require('dotenv').config();
-const {mongoose} =require('mongoose')
+const {mongoose} =require('mongoose');
+
+
+const app = express();
+
 
 mongoose.connect(process.env.MONGO_URL)
 .then(()=> console.log('Database is connected'))
@@ -12,7 +16,7 @@ mongoose.connect(process.env.MONGO_URL)
 const cors = require('cors');
 const authRoute = require('./routes/authRoute');
 
-const app = express();
+
 
 // Middleware
 app.use(express.json()); // Parse incoming JSON requests
@@ -24,7 +28,7 @@ app.use(cors({
 }));
 
 // Use routes
-app.use('/', authRoute); // Prefix all auth routes with '/auth'
+app.use('/auth', authRoute);// Prefix all auth routes with '/auth'
 
 const port = process.env.PORT || 8000; // Use environment variable for port if available
 app.listen(port, () => console.log(`Server is running on port ${port}`));

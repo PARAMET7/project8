@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv').config();
 const {mongoose} =require('mongoose');
-
+const cookieParser = require('cookie-parser')
 
 const app = express();
 
@@ -17,10 +17,12 @@ const cors = require('cors');
 const authRoute = require('./routes/authRoute');
 
 
-
 // Middleware
 app.use(express.json()); // Parse incoming JSON requests
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded data
+app.use(cookieParser());
+app.use(express.urlencoded({extended: false}));
+
 
 app.use(cors({
   origin: 'http://localhost:5174', // Specify frontend origin for CORS

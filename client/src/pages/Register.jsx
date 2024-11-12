@@ -15,7 +15,7 @@ export default function Register() {
     e.preventDefault();
     const {name, email, password} = data
     try {
-      const {data} = await axios.post('/register', {
+      const {data} = await axios.post('http://localhost:8000/auth/register', {
         name, email, password
       })
       if (data.error){

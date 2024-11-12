@@ -12,6 +12,9 @@ import DashBoard from './pages/Dashboard';
 axios.defaults.baseURL = 'http://localhost:8000';
 axios.defaults.withCredentials = true;
 
+const cardBtn = document.qu
+
+
 function App() {
   return (
       <UserContextProvider>
@@ -26,5 +29,7 @@ function App() {
       </UserContextProvider>
   );
 }
+
+
 
 export default App;

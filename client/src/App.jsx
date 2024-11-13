@@ -25,6 +25,7 @@ const productsDOM = document.querySelector('.products-center');
 
 //cart
 let cart = [];
+let buttonsDOM = [];
 //getting products
 class Products{
     async getProducts() {
@@ -70,17 +71,43 @@ class UI {
       console.error('productsDOM is not defined or not found in the document.');
     }
   }
+
+  getBagButtons(){
+    const buttons = [...document.querySelectorAll(".bag-btn")];
+    buttonsDOM = buttons;
+    buttons.forEach(button => {
+      let id = button.dataset.id;
+      let inCart = cart.find(item=> item.id === id);
+      if (inCart) {
+        button.innerText ="IN CART";
+        button.disabled =true;
+      }
+      button.addEventListener('click', event => {
+        event.target.innerText = "IN CART";
+        event.target.disavled = true;
+      })
+                //get product from products  and add product to the cart and save in local storage set cart value and add cart value and display showing in the cart:
+
+    });
+  }
 }
 
-// class Storage {
-
-// }
+class Storage {
+  static saveProducts(products){
+    localStorage.setItem("products", JSON.stringify(products))
+  }
+}
 
 document.addEventListener('DOMContentLoaded', ()=>{
   const ui = new UI()
   const products = new Products()
   //get all the products;
-  products.getProducts().then(products => ui.displayProducts(products));
+  products.getProducts().then(products => {
+    ui.displayProducts(products)
+    Storage.saveProducts(products)
+  }).then(()=>{
+    ui.getBagButtons();
+  });
 })
 
 function App() {

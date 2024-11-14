@@ -77,7 +77,7 @@ class UI {
     buttonsDOM = buttons;
     buttons.forEach(button => {
       let id = button.dataset.id;
-      let inCart = cart.find(item=> item.id === id);
+      let inCart = cart.find(item => item.id === id);
       if (inCart) {
         button.innerText ="IN CART";
         button.disabled =true;
@@ -85,16 +85,41 @@ class UI {
       button.addEventListener('click', event => {
         event.target.innerText = "IN CART";
         event.target.disavled = true;
-      })
-                //get product from products  and add product to the cart and save in local storage set cart value and add cart value and display showing in the cart:
+         //get product from products
+        let cartItem = {...Storage.getProduct(id), amount:1};
+        // and add product to the cart
+        cart = [...cart, cartItem];
+        //  save in local storage
+        Storage.saveCart(cart);
+        // set cart value
+        this.setCartValues(cart);
+      });
+                // and add cart value and display showing in the cart:
 
     });
+  }
+  setCartValues(cart){
+    let tempTotal=0;
+    let itemsTotal= 0;
+    cart.map(item => {
+      tempTotal += item.price * item.amount;
+      itemsTotal +=item.amount;
+    })
+    cartTotal.innerText = parseFloat(tempTotal.toFixed(2))
+    cartItems.innerText = itemsTotal;
   }
 }
 
 class Storage {
   static saveProducts(products){
     localStorage.setItem("products", JSON.stringify(products))
+  }
+  static getProduct(id) {
+    let products = JSON.parse(localStorage.getItem('products'));
+    return products.find(product => product.id===id);
+  }
+  static saveCart(cart){
+    localStorage.setItem("cart", JSON.stringify(cart));
   }
 }
 

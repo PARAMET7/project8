@@ -8,6 +8,7 @@ import axios from 'axios';
 import { Toaster } from 'react-hot-toast';
 import { UserContextProvider } from '../context/userContext'
 import DashBoard from './pages/Dashboard';
+// import { useState, useEffect } from 'react';
 
 axios.defaults.baseURL = 'http://localhost:8000';
 axios.defaults.withCredentials = true;

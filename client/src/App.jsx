@@ -1,5 +1,5 @@
 import './App.css'
-import { Routes, Route, createSearchParams } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Register from './pages/Register';
@@ -31,7 +31,7 @@ let buttonsDOM = [];
 class Products{
     async getProducts() {
       try {
-        let result = await fetch('../public/products.json');
+        let result = await fetch('/products.json');
         let data = await result.json();
 
         let products = data.items;

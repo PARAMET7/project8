@@ -3,7 +3,7 @@ import { Routes, Route, createSearchParams } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Register from './pages/Register';
-import Login from './pages/Login';
+import Login from '../src/pages/Login';
 import axios from 'axios';
 import { Toaster } from 'react-hot-toast';
 import { UserContextProvider } from '../context/userContext'

@@ -1,45 +1,33 @@
-import { useState } from "react";
-import axios from 'axios';
-import {toast} from "react-hot-toast";
-import {useNavigate} from "react-router-dom";
+// src/pages/Login.jsx
+import React, { useState } from "react";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+function Login() {
   const navigate = useNavigate();
   const [data, setData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const loginUser = async (e) => {
     e.preventDefault();
-    const {email, password}= data;
+    const { email, password } = data;
 
     try {
-      const {data} = await axios.post('/login', {
+      const { data } = await axios.post("/login", {
         email,
         password,
-      })
-      if (data.error){
-        toast.error(data.error)
-      } else{
-        setData({});
-        navigate('/dashboard')
-      }
-    }catch (error) {
-      console.log(error);
-    }
-
-    try {
-      const response = await axios.post('http://localhost:8000/login', {
-        email: data.email,
-        password: data.password,
-      }, {
-        withCredentials: true, // Allows cookies and credentials with the request
       });
-
-      console.log(response.data); // Handle the response from server
+      if (data.error) {
+        toast.error(data.error);
+      } else {
+        setData({});
+        navigate("/dashboard");
+      }
     } catch (error) {
-      console.error("Network error:", error);
+      console.log(error);
     }
   };
 
@@ -48,22 +36,22 @@ export default function Login() {
       <form onSubmit={loginUser}>
         <label>Email</label>
         <input
-          type='email'
+          type="email"
           placeholder="Enter your email"
           value={data.email}
           onChange={(e) => setData({ ...data, email: e.target.value })}
         />
-
         <label>Password</label>
         <input
-          type='password'
+          type="password"
           placeholder="Enter your password"
           value={data.password}
           onChange={(e) => setData({ ...data, password: e.target.value })}
         />
-
         <button type="submit">Login</button>
       </form>
     </div>
   );
 }
+
+export default Login;  // Ensure this is exported as default
